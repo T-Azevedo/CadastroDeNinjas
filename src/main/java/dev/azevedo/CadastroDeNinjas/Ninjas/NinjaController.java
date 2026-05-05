@@ -8,10 +8,12 @@ import java.util.List;
 @RequestMapping
 public class NinjaController {
 
+    private final NinjaRepository ninjaRepository;
     public NinjaService ninjaService;
 
-    public NinjaController(NinjaService ninjaService) {
+    public NinjaController(NinjaService ninjaService, NinjaRepository ninjaRepository) {
         this.ninjaService = ninjaService;
+        this.ninjaRepository = ninjaRepository;
     }
 
     @GetMapping("/boasVindas")
@@ -44,9 +46,9 @@ public class NinjaController {
     }
 
     // Deletar ninjas (DELETE)
-    @DeleteMapping("/deletarID")
-    public String deletarNinjaID() {
-        return "Ninja deletado por ID";
+    @DeleteMapping("/deletar/{id}")
+    public void deletarNinjaPorId(@PathVariable Long id) {
+        ninjaService.deletarNinjaPorId(id);
     }
 
 
